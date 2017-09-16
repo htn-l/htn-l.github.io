@@ -1,62 +1,60 @@
 <html>
-	<body background="background.jpg">
+<body background="background.jpg">
 
-	<head>
-		<link rel="stylesheet" type="text/css" href="style.css">
-	</head>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
 
-	<body>
-	
-
-		<div class="container">
-			
-			<form method="post">
-				<input type="text"  id="username" placeholder="Username"> </br>
-					
-				 <input type="password" name="password" id="password" placeholder="Password"> 
-			</form>
-
-			<button type="button" id="submit" onclick="getText()"> Submit </button>
-
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<body>
 
 
-  			<script type="text/javascript">
+<div class="container">
 
-				function getText(){
-					username = document.getElementById("username").value;
-					if(username==""){
-						alert("enter username!")
-					}
-					password = document.getElementById("password").value;
-					if(password==""){
-						alert("enter password!")
-					
-					}	
-					
-					$.ajax({
-						url: html,
-						type="POST",
-						data: "Username="+username, "Password"+password, 
-						success:function(data){
-							alert("success");
-							
-						}
+    <form method="post">
+        <input type="text" id="username" placeholder="Username"> </br>
 
-					});
-				
-				}
+        <input type="password" name="password" id="password" placeholder="Password">
+    </form>
+
+    <button type="button" id="submit" onclick="getText()"> Submit</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-			</script>
-		</div>
-	</body>
-	       	
+    <script type="text/javascript">
 
-		
+        function getText() {
+            username = document.getElementById("username").value;
+            if ((username == "") || (password = "")) {
+                if (username == "") {
+                    alert("enter username!")
+                }
+                password = document.getElementById("password").value;
+                if (password == "") {
+                    alert("enter password!")
+
+                }
+
+            }
+            else {
+                $.ajax({
+                    url: "http://127.0.0.1:5000/r",
+                    type: "POST",
+                    data: "username=".concat(username) + "&password=".concat(password),
+                    success: function (data) {
+                        alert("success");
+
+                    }
+
+                });
+            }
+        }
 
 
 
+    </script>
+</div>
+</body>
 
 
 </html>
