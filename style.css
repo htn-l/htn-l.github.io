@@ -15,12 +15,12 @@
     box-shadow: 0 0 100px #000000;
     position: absolute;
     top: 50%;
-    margin-top:-100px;
+    margin-top: -100px;
     left: 50%;
-    margin-left:-200px;
+    margin-left: -200px;
     color: #ccc;
-    text-align:center;
-    vertical-align:middle
+    text-align: center;
+    vertical-align: middle
 }
 
 input[type="text"] {
