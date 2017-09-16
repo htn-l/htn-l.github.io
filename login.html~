@@ -10,16 +10,37 @@
 
 		<div class="container">
 			
-			<form>
-				<input type="text"  name="username" placeholder="USERNAME"> </br>
+			<form method="post">
+				<input type="text"  id="username" placeholder="Username"> </br>
+					
+				 <input type="password" name="password" id="password" placeholder="Password"> 
 			</form>
 
-			<form>
+			<button type="button" id="submit" onclick="getText()"> Submit </button>
+
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+  			<script type="text/javascript">
+
+				function getText(){
+					username = document.getElementById("username").value;
+					if(username==""){
+						alert("enter username!")
+					}
+					password = document.getElementById("password").value;
+					if(password==""){
+						alert("enter password!")
+					
+					}
+					console.log(username);
+					console.log(password);
 				
-				 <input type="text" name="password" placeholder="PASSWORD"> 
-			</form>
+				
+				}
 
-			<button type="button" id="submit"> Submit </button>
+
+			</script>
 		</div>
 	</body>
 	       	
