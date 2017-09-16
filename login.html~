@@ -11,12 +11,12 @@
 		<div class="container">
 			
 			<form>
-				<input type="text"  name="username" placeholder="Username"> </br>
+				<input type="text"  name="username" placeholder="USERNAME"> </br>
 			</form>
 
 			<form>
 				
-				 <input type="text" name="password" placeholder="Password"> 
+				 <input type="text" name="password" placeholder="PASSWORD"> 
 			</form>
 
 			<button type="button" id="submit"> Submit </button>
