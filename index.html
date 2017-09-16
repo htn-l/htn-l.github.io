@@ -253,6 +253,7 @@ if (!('webkitSpeechRecognition' in window)) {
   };
   recognition.onend = function() {
     recognizing = false;
+    ignore_onend = true;
     if (ignore_onend) {
       return;
     }
