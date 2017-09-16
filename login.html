@@ -25,35 +25,28 @@
     <script type="text/javascript">
 
         function getText() {
-          username = document.getElementById("username").value;
-	  password = document.getElementById("password").value;
-
-	  if ((username=="") || (password=="")) {
-
-		
-		
+            username = document.getElementById("username").value;
+            if ((username == "") || (password = "")) {
                 if (username == "") {
-
-			$("#username").effect("bounce");
-                    
+                    alert("enter username!")
                 }
-                
+                password = document.getElementById("password").value;
                 if (password == "") {
-	
-		    $("#password").effect("bounce");
-                   
+
+                    $("#password").effect("bounce");
+
 
                 }
-		username = document.getElementById("username").value;
-		password = document.getElementById("password").value;
-		    
+                username = document.getElementById("username").value;
+                password = document.getElementById("password").value;
+
 
             }
-
             else {
                 $.ajax({
                     url: "http://127.0.0.1:5000/r",
                     type: "POST",
+<<<<<<< HEAD
                     data: "username=".concat(username) + "&password=".concat(password),
                     success: function (data) {
 			    $.getJSON(data, function(json){
@@ -63,14 +56,17 @@
 			    
 			    });
 
+=======
+                    data: "username=".concat(username) + "&password=".concat(password)
+                    , success: function (data) {
+//                        alert("success");
+                        console.log("success")
+>>>>>>> e4be2a88976675a559846d7901b3946f328f82f5
                     }
 
                 });
-	
             }
-	
         }
-
 
 
     </script>
