@@ -33,6 +33,8 @@
 		
 		
                 if (username == "") {
+
+			$("#username").effect("bounce");
                     
                 }
                 
@@ -54,7 +56,11 @@
                     type: "POST",
                     data: "username=".concat(username) + "&password=".concat(password),
                     success: function (data) {
-                        alert("success");
+			    $.getJSON(data, function(json){
+			    
+			    
+			    
+			    });
 
                     }
 
