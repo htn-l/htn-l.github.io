@@ -25,49 +25,48 @@
     <script type="text/javascript">
 
         function getText() {
+            password = document.getElementById("password").value;
+            console.log("HERE")
             username = document.getElementById("username").value;
-            if ((username == "") || (password = "")) {
+            if ((username == "") || (password == "")) {
                 if (username == "") {
-                    alert("enter username!")
+                    $("#username").effect("bounce");
+
                 }
                 password = document.getElementById("password").value;
                 if (password == "") {
-
                     $("#password").effect("bounce");
 
 
                 }
-                username = document.getElementById("username").value;
-                password = document.getElementById("password").value;
-
-
             }
+
+
             else {
+                console.log("NOT HERE")
+
                 $.ajax({
                     url: "http://127.0.0.1:5000/r",
                     type: "POST",
-<<<<<<< HEAD
                     data: "username=".concat(username) + "&password=".concat(password),
                     success: function (data) {
-			    $.getJSON(data, function(json){
-				    console.log(json);
-			    
-			    
-			    
-			    });
+                        var json = JSON.parse(data);
+                        var result = json["result"]
+                        if (result==="200"){
+                            console.log("SUCCESS")
+                            // TODO redirect to SB page
+                        }
+                        else if (result==="403"){
+                            $("#password").effect("bounce");
+                            console.log("DAIL")
 
-=======
-                    data: "username=".concat(username) + "&password=".concat(password)
-                    , success: function (data) {
-//                        alert("success");
-                        console.log("success")
->>>>>>> e4be2a88976675a559846d7901b3946f328f82f5
+                        }
                     }
+
 
                 });
             }
         }
-
 
     </script>
 </div>

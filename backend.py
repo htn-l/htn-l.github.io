@@ -5,11 +5,6 @@ from hashlib import sha256
 
 app = Flask(__name__)
 CORS(app)
-success = dict()
-success["result"] = "true"
-
-fail = dict()
-fail["result"] = "true"
 
 
 @app.route('/r', methods=['POST'])
@@ -18,12 +13,13 @@ def show_user_profile():
     print(data)
     user = data["username"]
     password = data["password"]
-    # TODO check if user is in db
+    # TODO check if user is in db if not create otherwise sign in
     # if (not in db):
     # return
-    # TODO encrypt with sha256 then store to db
     hashedPass = sha256(password.encode()).hexdigest()
     print(hashedPass)
+    success = dict()
+    success["result"] = "200"
     return json.dumps(success)
 
 
@@ -34,9 +30,15 @@ def sign_in():
     user = data["user"]
     password = data["password"]
     # TODO Get users password hashed and compare to the hash
-    storedPass = ""
+    storedPass = "043a718774c572bd8a25adbeb1bfcd5c0256ae11cecf9f9c3f925d0e52beaf89"
     if storedPass == sha256(bytes(password)).hexdigest():
+        success = dict()
+        success["result"] = "200"
         return json.dumps(success)
+    else:
+        fail = dict()
+        fail["result"] = "403"
+        return json.dumps(fail)
 
 
 if __name__ == '__main__':

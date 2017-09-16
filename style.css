@@ -44,6 +44,7 @@ input[id="username"] {
     margin-bottom: 20px;
     border-radius: 10px;
     border: none;
+    padding: 9px 40px;
     -moz-box-shadow: 0 0 6px #000000;
     -webkit-box-shadow: 0 0 6px #000000;
     box-shadow: 0 0 6px #000000;
