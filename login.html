@@ -24,18 +24,24 @@
     <script type="text/javascript">
 
         function getText() {
-            username = document.getElementById("username").value;
-            if ((username == "") || (password = "")) {
+          username = document.getElementById("username").value;
+	  password = document.getElementById("password").value;
+	  if ((username=="") || (password=="")) {
+		
                 if (username == "") {
                     alert("enter username!")
                 }
-                password = document.getElementById("password").value;
+                
                 if (password == "") {
                     alert("enter password!")
 
                 }
+		username = document.getElementById("username").value;
+		password = document.getElementById("password").value;
+		    
 
             }
+
             else {
                 $.ajax({
                     url: "http://127.0.0.1:5000/r",
@@ -47,7 +53,9 @@
                     }
 
                 });
+	
             }
+	
         }
 
 
