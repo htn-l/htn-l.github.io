@@ -1,0 +1,26 @@
+#header{
+	font-size: 70px;
+	text-align:center; 
+	border-style:solid; 
+	border-width: 5px;
+	border-color: green;
+
+}
+.container{
+	width:500px;
+	height:400px;
+	text-align:center;
+	margin: 0 auto;
+	background-color: green;
+
+
+}
+input[type="text"]{
+	padding:12px 12px;
+}
+input[name="username"]{
+	margin-top:100px;
+	margin-bottom:60px;
+
+}
+
