@@ -1,16 +1,23 @@
+
 <html>
 
 	<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    $(document).ready(function(){
+    <script src="jquery-3.2.1.min.js"></script>
+    <script>
+    "use strict";
+    $("document").ready(function(){
+      console.log("indiendineind");
       var count = 1;
       $(".btn1").click(function(){
-        $(".top").append("<div class = \"lec\">LEC ".concat(count)+"</div>")
+        console.log("hi");
+        $(".top").append("<div class = \"lec\">LEC ".concat(count)+"</div>");
+        // alert($(".top").html());
+        console.log("bye");
         count++;
       });
     });
     </script>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300">
 	</head>
 
