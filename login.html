@@ -22,12 +22,13 @@
 
 
     <script type="text/javascript">
+        $(document).ready();
 
         function getText() {
             username = document.getElementById("username").value;
-            if ((username == "") || (password = "")) {
+            if ((username == "") || (password == "")) {
                 if (username == "") {
-                    alert("enter username!")
+//                    alert("enter username!")
                 }
                 password = document.getElementById("password").value;
                 if (password == "") {
@@ -40,16 +41,15 @@
                 $.ajax({
                     url: "http://127.0.0.1:5000/r",
                     type: "POST",
-                    data: "username=".concat(username) + "&password=".concat(password),
-                    success: function (data) {
-                        alert("success");
-
+                    data: "username=".concat(username) + "&password=".concat(password)
+                    ,success: function (data) {
+//                        alert("success");
+                        console.log("success")
                     }
 
                 });
             }
         }
-
 
 
     </script>
