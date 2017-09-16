@@ -1,72 +1,29 @@
-
-<div>
-  <a href="#" id="start_button" onclick="startDictation(event)">Dictate</a>
-</div>
-
-<div id="results">
-  <span id="final_span" class="final"></span>
-  <span id="interim_span" class="interim"></span>
-</div>
-
-<script type="text/javascript">
-var final_transcript = '';
-var recognizing = false;
-
-if ('webkitSpeechRecognition' in window) {
-
-  var recognition = new webkitSpeechRecognition();
-
-  recognition.continuous = true;
-  recognition.interimResults = false;
-
-  recognition.onstart = function() {
-    recognizing = true;
-  };
-
-  recognition.onerror = function(event) {
-    console.log(event.error);
-  };
-
-  recognition.onend = function() {
-    recognizing = false;
-  };
-
-  recognition.onresult = function(event) {
-    var interim_transcript = '';
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
-      if (event.results[i].isFinal) {
-        final_transcript += event.results[i][0].transcript;
-      } else {
-        interim_transcript += event.results[i][0].transcript;
-      }
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Stuff</title>
+<script src="jquery-3.2.1.min.js"></script>
+<script>
+    // var params = {
+    //     host: 'api.smmry.com',
+    //     path: '/?SM_API_KEY=014E9A686E&SM_URL=' + "https://stackoverflow.com/questions/17049839/continous-speech-recognition-with-webkit-speech-api",
+    //     method: 'POST'
+    // };
+    $.ajax({
+      type: "POST",
+      url: 'http://api.smmry.com' + '/?SM_API_KEY=014E9A686E&SM_URL=' + "https://stackoverflow.com/questions/17049839/",
+      data: {"sm_api_input" : "stuff. stuff2. hello test. graduate. maybe good. log are good."},
+      success: function(data){handleSuccess(data);},
+      dataType: "application/json"
+    });
+    // var req = http.request(params, function(res) {
+    //     res.on('data', function(data) {
+    //         console.log(JSON.parse(data.toString()));
+    //     });
+    //     res.on('end', function() {
+    //         console.log('No more data in response.');
+    //     });
+    // });
+    function handleSuccess(data) {
+        console.log(JSON.parse(data.toString()));
     }
-    final_transcript = capitalize(final_transcript);
-    console.log(final_transcript);
-    final_span.innerHTML = linebreak(final_transcript);
-    interim_span.innerHTML = linebreak(interim_transcript);
-    
-  };
-}
-
-var two_line = /\n\n/g;
-var one_line = /\n/g;
-function linebreak(s) {
-  return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
-}
-
-function capitalize(s) {
-  return s.replace(s.substr(0,1), function(m) { return m.toUpperCase(); });
-}
-
-function startDictation(event) {
-  if (recognizing) {
-    recognition.stop();
-    return;
-  }
-  final_transcript = '';
-  recognition.lang = 'en-US';
-  recognition.start();
-  final_span.innerHTML = '';
-  interim_span.innerHTML = '';
-}
 </script>
