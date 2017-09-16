@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Stuff</title>
+<script src="jquery-3.2.1.min.js"></script>
+<script>
+    // var params = {
+    //     host: 'api.smmry.com',
+    //     path: '/?SM_API_KEY=014E9A686E&SM_URL=' + "https://stackoverflow.com/questions/17049839/continous-speech-recognition-with-webkit-speech-api",
+    //     method: 'POST'
+    // };
+    $.ajax({
+      type: "POST",
+      url: 'http://api.smmry.com' + '/?SM_API_KEY=014E9A686E&SM_URL=' + "https://stackoverflow.com/questions/17049839/",
+      data: {"sm_api_input" : "stuff. stuff2. hello test. graduate. maybe good. log are good."},
+      success: function(data){handleSuccess(data);},
+      dataType: "application/json"
+    });
+    // var req = http.request(params, function(res) {
+    //     res.on('data', function(data) {
+    //         console.log(JSON.parse(data.toString()));
+    //     });
+    //     res.on('end', function() {
+    //         console.log('No more data in response.');
+    //     });
+    // });
+    function handleSuccess(data) {
+        console.log(JSON.parse(data.toString()));
+    }
+</script>

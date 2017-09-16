@@ -11,14 +11,7 @@
 
     <button onclick="startDictation(event)">Start Recording</button>
 
-    <div class = "text">
-    </div>
-
-
-
-
-
-    <div id="results">
+<div id="results">
   <span id="final_span" class="final"></span>
   <span id="interim_span" class="interim"></span>
 </div>
@@ -51,14 +44,12 @@ if ('webkitSpeechRecognition' in window) {
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
         final_transcript += event.results[i][0].transcript;
-      } else {
-        interim_transcript += event.results[i][0].transcript;
+      }else{
+      interim_transcript += event.results[i][0].transcript;
       }
     }
     final_transcript = capitalize(final_transcript);
     console.log(final_transcript);
-    var div = document.getElementsByClassName("text"); 
-    div.innerHTML += linebreak(final_transcript);
     final_span.innerHTML = linebreak(final_transcript);
     interim_span.innerHTML = linebreak(interim_transcript);
     
@@ -82,11 +73,15 @@ function startDictation(event) {
   }
   final_transcript = '';
   recognition.lang = 'en-US';
-  recognition.start();
-  final_span.innerHTML = '';
+  recognition.start();  final_span.innerHTML = '';
   interim_span.innerHTML = '';
 }
+	
+
 </script>
+	
+	
+	
 	</body>
 
 </html>

@@ -1,24 +1,9 @@
-<html>
 
-	<head>
+<div>
+  <a href="#" id="start_button" onclick="startDictation(event)">Dictate</a>
+</div>
 
-		<link rel="stylesheet" type="text/css" href="recordingstyle.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300">
-	</head>
-
-	<body>
-		<h1 id="header"> SumNotes </h1>
-
-    <button onclick="startDictation(event)">Start Recording</button>
-
-    <div class = "text">
-    </div>
-
-
-
-
-
-    <div id="results">
+<div id="results">
   <span id="final_span" class="final"></span>
   <span id="interim_span" class="interim"></span>
 </div>
@@ -57,8 +42,6 @@ if ('webkitSpeechRecognition' in window) {
     }
     final_transcript = capitalize(final_transcript);
     console.log(final_transcript);
-    var div = document.getElementsByClassName("text"); 
-    div.innerHTML += linebreak(final_transcript);
     final_span.innerHTML = linebreak(final_transcript);
     interim_span.innerHTML = linebreak(interim_transcript);
     
@@ -87,6 +70,3 @@ function startDictation(event) {
   interim_span.innerHTML = '';
 }
 </script>
-	</body>
-
-</html>
