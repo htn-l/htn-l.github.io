@@ -19,22 +19,27 @@
     <button type="button" id="submit" onclick="getText()"> Submit</button>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
 
 
     <script type="text/javascript">
-        $(document).ready();
 
         function getText() {
             username = document.getElementById("username").value;
-            if ((username == "") || (password == "")) {
+            if ((username == "") || (password = "")) {
                 if (username == "") {
-//                    alert("enter username!")
+                    alert("enter username!")
                 }
                 password = document.getElementById("password").value;
                 if (password == "") {
-                    alert("enter password!")
+
+		    $("#password").effect("bounce");
+
 
                 }
+		username = document.getElementById("username").value;
+		password = document.getElementById("password").value;
+
 
             }
             else {
@@ -50,6 +55,7 @@
                 });
             }
         }
+
 
 
     </script>
