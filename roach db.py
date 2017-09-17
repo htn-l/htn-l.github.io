@@ -26,11 +26,17 @@ class RoachDB:
         self.cur.execute("INSERT INTO users_to_lectures (username, lectureid) VALUES (%s,%s)", [USERNAME, number])
 
     def find_user(self, username):
-        self.cur.execute("SELECT * FROM users WHERE username=%s", [username])
+        self.cur.execute("SELECT * FROM users WHERE username = %s", [username])
         return len(self.cur.fetchall()) > 0
 
+    def get_user_hash(self, username):
+        self.cur.execute("SELECT password FROM users WHERE username = (%s)", [username])
+        return self.cur.fetchall()
+
+
+
     def view_lecture(self, id):
-        self.cur.execute("SELECT (transcript, summary) FROM lectures WHERE lectureid = "+id)
+        self.cur.execute("SELECT (transcript, summary) FROM lectures WHERE lectureid = %s", [id])
         self.cur.fetchall();
 
     def get_all_lectures(self, username):
@@ -51,8 +57,9 @@ if __name__ == '__main__':
     db = RoachDB()
     print(db.find_user("leonf"))
     db.view_lecture("280333094310215681")
-    if not db.find_user("leon"):
-        db.create_user("leon", "Fattakhov")
+    db.get_user_hash("leon")
+    if not db.find_user("leonf"):
+        db.create_user("leonf", "Fattakhov")
     db.add_lecture("leon",
                    "djfjaslkdjfkdsajf lksdjflksjlkfjdslkfjdsalkjfds;lkajflkdsajflksajdlkfjdsalkfjdslkajfdlksajflkjlkdjfalkdsjflkdsjflkdsjfldsjfjflkdsajf;lsaf")
     db.get_all_lectures("leon")
