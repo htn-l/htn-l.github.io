@@ -14,19 +14,23 @@
         count++;
       });
 
-      $(".lec").click(function() {
+      // $(".lec").click(function() {
+      $(document).on("click", ".lec", function(event) {
         // do this work
         var n  = Number( $(this).text().slice(3));
+        console.log("here");
+        console.log("{{username}}");
         $.ajax({
               url: "http://localhost:5000/lectures",
               type: 'POST',
-              data: "username=".concat(username),
+              data: "username=".concat("{{username}}"),
               xhrFields: {
                 withCredentials: true
               },
               crossDomain: true,
               success: function (data) {
-                window.location = "http://localhost:5000/record"
+                console.log("good");
+                window.location = "http://localhost:5000/display"
               }
               //     var json = JSON.parse(data);
               //     var result = json["result"]

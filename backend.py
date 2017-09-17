@@ -253,6 +253,9 @@ CORS(app)
 db = roachdb.RoachDB();
 ##db.create_user("Test", sha256(bytes("red", "utf-8")).hexdigest())
 print("added")
+curUser = ""
+datat = {}
+
 def get_summary(text):
     total_string =""
     from sumy.parsers.html import HtmlParser
@@ -289,20 +292,28 @@ def get_summaryi():
 
     success = dict()
     success["result"] = summary
+    print(summary)
     return json.dumps(success)
 
-@app.route('/lectures')
+@app.route('/lectures', methods=['POST'])
 def show_lectures():
+    global datat
     data = request.form
     print(data)
     user = data["username"]
     temp =dict()
     temp["result"]= db.get_all_lectures(user)
-    return json.dumps(temp)
-
+    # Array of strings repping (transcript, summary) tuples in order of time)
+    datat = json.dumps(temp)
+    return redirect("display", code = 302)
+@app.route("/display")
+def show_transcripts():
+    global datat
+    return render_template("index 2.html", data = datat)
 
 @app.route('/r', methods=['POST'])
 def show_user_profile():
+    global curUser
     data = request.form
     print(data)
     user = data["username"]
@@ -316,7 +327,8 @@ def show_user_profile():
     if (db.find_user(user) and hashedPass==db.get_user_hash(user)):
     # if 2+2 ==3:
     #     return render_template("home.html", name=None)
-        return redirect('/home')#'#url_for('show_home'))
+        curUser = user
+        return redirect('/home', code=302)#'#url_for('show_home'))
     else:
         db.create_user(user,password)
         fail = dict()
@@ -325,7 +337,8 @@ def show_user_profile():
 
 @app.route('/home')
 def show_home():
-    return render_template("home.html", name=None)
+    global curUser
+    return render_template("home.html", name=None, username=curUser)
 
 # @app.route('/signin', methods=['POST'])
 # def sign_in():
