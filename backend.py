@@ -1,6 +1,6 @@
 import json
 from flask_cors import CORS
-from flask import Flask, request
+from flask import Flask, request, render_template
 from hashlib import sha256
 
 app = Flask(__name__)
