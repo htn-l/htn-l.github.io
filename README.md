@@ -1,5 +1,12 @@
 # SumNotes
 
+![s1](s1.jpg)
+
+
+![s2](s2.jpg)
+
+
+![s3](s3.jpg)
 
 # The Problem
 
