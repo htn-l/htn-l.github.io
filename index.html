@@ -55,12 +55,25 @@ if ('webkitSpeechRecognition' in window) {
         interim_transcript += event.results[i][0].transcript;
       }
     }
-    final_transcript = capitalize(final_transcript);
+    final_transcript = capitalize(final_transcript)+".";
     console.log(final_transcript);
-    var div = document.getElementsByClassName("text"); 
-    div.innerHTML += linebreak(final_transcript);
     final_span.innerHTML = linebreak(final_transcript);
-    interim_span.innerHTML = linebreak(interim_transcript);
+	  $.ajax({
+	  	url:  "http://127.0.0.1:5000/transcript",
+		type:"POST", 
+		contentType: "application/json", 
+		dataType: "json",
+		  data: {"text":final_transcript},
+		  success: function(data) {
+		  	var json = JSON.parse(data); 
+			var result = json["result"]
+			
+
+		  
+		  }
+	  
+	  }
+    
     
   };
 }
