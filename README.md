@@ -2,12 +2,6 @@
 
 ![s1](s1.jpg)
 
-
-![s2](s2.jpg)
-
-
-![s3](s3.jpg)
-
 # The Problem
 
 Students have to take notes but also pay attention and learn material at the same time during lectures.
