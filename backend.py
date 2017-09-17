@@ -295,6 +295,16 @@ def show_lectures():
     temp["result"]= db.get_all_lectures(user)
     return json.dumps(temp)
 
+@app.route('/add_lecture')
+def add_a_lecture():
+    data = request.form
+    print(data)
+    user = data["username"]
+    transcript = data["transcript"]
+    summary = data["summary"]
+    temp =dict()
+    temp["result"]= db.get_all_lectures(user)
+    return json.dumps(temp)
 
 @app.route('/r', methods=['POST'])
 def show_user_profile():
