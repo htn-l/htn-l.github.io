@@ -13,6 +13,38 @@
 				$(".top").css({"height": ((count * 10 + 100).toString()).concat("%")});
         count++;
       });
+
+      $(".lec").click(function() {
+        // do this work
+        var n  = Number( $(this).text().slice(3));
+        $.ajax({
+              url: "http://localhost:5000/lectures",
+              type: 'POST',
+              data: "username=".concat(username),
+              xhrFields: {
+                withCredentials: true
+              },
+              crossDomain: true,
+              success: function (data) {
+                window.location = "http://localhost:5000/record"
+              }
+              //     var json = JSON.parse(data);
+              //     var result = json["result"]
+              //     if (result==="200"){
+              //         console.log("SUCCESS")
+              //         // TODO redirect to SB page
+              //     }
+              //     else if (result==="403"){
+              //         $("#password").effect("bounce");
+              //         console.log("DAIL")
+
+              //     }
+              //     alert(result);
+              // }
+
+
+          });
+      });
     });
     </script>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}">
