@@ -254,7 +254,7 @@ db = roachdb.RoachDB();
 ##db.create_user("Test", sha256(bytes("red", "utf-8")).hexdigest())
 print("added")
 def get_summary(text):
-
+    total_string =""
     from sumy.parsers.html import HtmlParser
     from sumy.parsers.plaintext import PlaintextParser
     from sumy.nlp.tokenizers import Tokenizer
@@ -273,15 +273,20 @@ def get_summary(text):
     summarizer.stop_words = get_stop_words(LANGUAGE)
 
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
-        print(sentence)
+        total_string += str(sentence)
+    return total_string
+
 
 
 @app.route("/transcript", methods=["POST"])
 def get_summaryi():
     data = request.form
     print(data)
+    user = data["username"]
     text = data["text"]
     summary = get_summary(text)
+    db.add_lecture(user,text,summary)
+
     success = dict()
     success["result"] = summary
     return json.dumps(success)
@@ -295,16 +300,6 @@ def show_lectures():
     temp["result"]= db.get_all_lectures(user)
     return json.dumps(temp)
 
-@app.route('/add_lecture')
-def add_a_lecture():
-    data = request.form
-    print(data)
-    user = data["username"]
-    transcript = data["transcript"]
-    summary = data["summary"]
-    temp =dict()
-    temp["result"]= db.get_all_lectures(user)
-    return json.dumps(temp)
 
 @app.route('/r', methods=['POST'])
 def show_user_profile():
@@ -315,9 +310,6 @@ def show_user_profile():
     hashedPass = sha256(password.encode()).hexdigest()
 
     # TODO check if user is in db if not create otherwise sign in
-    print(db.get_user_hash(user))
-    print(hashedPass)
-    print("NEVER")
     # print(list(list(x) for x in db.get_user_hash(user)))
     # print(list(db.get_user_hash(user))[0][0])
 ##    sys.flush()
@@ -326,6 +318,7 @@ def show_user_profile():
     #     return render_template("home.html", name=None)
         return redirect('/home')#'#url_for('show_home'))
     else:
+        db.create_user(user,password)
         fail = dict()
         fail["result"] = "403"
         return json.dumps(fail)
@@ -334,8 +327,8 @@ def show_user_profile():
 def show_home():
     return render_template("home.html", name=None)
 
-@app.route('/signin', methods=['POST'])
-def sign_in():
+# @app.route('/signin', methods=['POST'])
+# def sign_in():
 #     data = request.form
 #     print(data)
 #     user = data["user"]
@@ -350,12 +343,11 @@ def sign_in():
 #         fail = dict()
 #         fail["result"] = "403"
 #         # return json.dumps(fail)
-
-@app.route('/')
-def home_page():
-    #console.log("h")
-    print("h")
-    return render_template("login.html", name=None)
+    @app.route('/')
+    def home_page():
+        #console.log("h")
+        print("h")
+        return render_template("login.html", name=None)
 if __name__ == '__main__':
     # s = get_summary("""Prime Minister Justin Trudeau will help open the Hack the North conference at the University of Waterloo Friday night
     #
