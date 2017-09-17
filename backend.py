@@ -288,6 +288,7 @@ def home_page():
 
 @app.route("/transcript", methods=["POST"])
 def get_summaryi():
+    global curUser
     data = request.form
     print(data)
     # user = data["username"]
@@ -295,7 +296,7 @@ def get_summaryi():
     print(text)
     #print(data[1])
     summary = get_summary(text)
-    db.add_lecture(user,text,summary)
+    db.add_lecture(curUser,text,summary)
 
     success = dict()
     success["result"] = summary
