@@ -1,8 +1,8 @@
 <html>
-<body background="background.jpg">
+<body background="{{ url_for('static',filename='background.jpg') }}">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
 </head>
 
 <body>
