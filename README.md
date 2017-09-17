@@ -1,7 +1,5 @@
 # SumNotes
-
 ![s1](s1.jpg)
-
 # The Problem
 
 Students have to take notes but also pay attention and learn material at the same time during lectures.
