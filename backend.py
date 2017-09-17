@@ -100,6 +100,7 @@ from __future__ import division, print_function, unicode_literals
 import json
 from flask_cors import CORS
 from flask import Flask, request
+from flask import render_template
 from hashlib import sha256
 
 app = Flask(__name__)
