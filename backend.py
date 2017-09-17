@@ -286,6 +286,16 @@ def get_summaryi():
     success["result"] = summary
     return json.dumps(success)
 
+@app.route('/lectures')
+def show_lectures():
+    data = request.form
+    print(data)
+    user = data["username"]
+    temp =dict()
+    temp["result"]= db.get_all_lectures(user)
+    return json.dumps(temp)
+
+
 @app.route('/r', methods=['POST'])
 def show_user_profile():
     data = request.form
@@ -316,20 +326,20 @@ def show_home():
 
 @app.route('/signin', methods=['POST'])
 def sign_in():
-    data = request.form
-    print(data)
-    user = data["user"]
-    password = data["password"]
-    # TODO Get users password hashed and compare to the hash
-    storedPass = "043a718774c572bd8a25adbeb1bfcd5c0256ae11cecf9f9c3f925d0e52beaf89"
-    if storedPass == sha256(bytes(password)).hexdigest():
-        success = dict()
-        success["result"] = "200"
-        return json.dumps(success)
-    else:
-        fail = dict()
-        fail["result"] = "403"
-        return json.dumps(fail)
+#     data = request.form
+#     print(data)
+#     user = data["user"]
+#     password = data["password"]
+#     # TODO Get users password hashed and compare to the hash
+#     storedPass = "043a718774c572bd8a25adbeb1bfcd5c0256ae11cecf9f9c3f925d0e52beaf89"
+#     if storedPass == sha256(bytes(password)).hexdigest():
+#         success = dict()
+#         success["result"] = "200"
+#         return json.dumps(success)
+#     else:
+#         fail = dict()
+#         fail["result"] = "403"
+#         # return json.dumps(fail)
 
 @app.route('/')
 def home_page():
