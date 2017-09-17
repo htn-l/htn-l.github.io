@@ -1,5 +1,6 @@
 # Import the driver.
 import psycopg2  # Connect to the "bank" database.
+import uuid
 
 
 class RoachDB:
@@ -18,13 +19,28 @@ class RoachDB:
         self.cur.execute('INSERT INTO users (username, password) VALUES (%s,%s)', (username, password))
 
     def add_lecture(self, USERNAME, transcript, summary="TEMWP", date="TODAY", coursecode="NONE", profname="LOSER"):
-        self.cur.execute("INSERT INTO lectures (transcript, summary, date,coursecode,profname) VALUES (%s,%s,%s,%s,%s)",
-                    (transcript, summary, date, coursecode, profname))
-        self.cur.execute("INSERT INTO users_to_lectures (username) VALUES (%s)",[USERNAME])
+        self.cur.execute(
+            "INSERT INTO lectures (transcript, summary, date,coursecode,profname) VALUES (%s,%s,%s,%s,%s) RETURNING lectureid",
+            (transcript, summary, date, coursecode, profname))
+        number = self.cur.fetchone()[0]
+        self.cur.execute("INSERT INTO users_to_lectures (username, lectureid) VALUES (%s,%s)", [USERNAME, number])
 
     def find_user(self, username):
         self.cur.execute("SELECT * FROM users WHERE username=%s", [username])
         return len(self.cur.fetchall()) > 0
+
+    def view_lecture(self, id):
+        self.cur.execute("SELECT (transcript, summary) FROM lectures WHERE lectureid = "+id)
+        self.cur.fetchall();
+
+    def get_all_lectures(self, username):
+        self.cur.execute("SELECT lectureid FROM users_to_lectures WHERE username=(%s)", [username])
+        temp = []
+        for i in self.cur.fetchall():
+            temp.append(i[0])
+        return temp
+
+
 
     def close(self):
         self.cur.close()
@@ -34,7 +50,10 @@ class RoachDB:
 if __name__ == '__main__':
     db = RoachDB()
     print(db.find_user("leonf"))
-    if not db.find_user("leonf"):
-        db.create_user("leonf", "Fattakhov")
-    db.add_lecture("leonf","djfjaslkdjfkdsajf lksdjflksjlkfjdslkfjdsalkjfds;lkajflkdsajflksajdlkfjdsalkfjdslkajfdlksajflkjlkdjfalkdsjflkdsjflkdsjfldsjfjflkdsajf;lsaf")
+    db.view_lecture("280333094310215681")
+    if not db.find_user("leon"):
+        db.create_user("leon", "Fattakhov")
+    db.add_lecture("leon",
+                   "djfjaslkdjfkdsajf lksdjflksjlkfjdslkfjdsalkjfds;lkajflkdsajflksajdlkfjdsalkfjdslkajfdlksajflkjlkdjfalkdsjflkdsjflkdsjfldsjfjflkdsajf;lsaf")
+    db.get_all_lectures("leon")
     db.close()
