@@ -31,7 +31,6 @@ class RoachDB:
 
     def get_user_hash(self, username):
         self.cur.execute("SELECT password FROM users WHERE username = (%s)", [username])
-        return self.cur.fetchall()
 
 
 

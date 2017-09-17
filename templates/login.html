@@ -1,4 +1,7 @@
+
 <html>
+<div data-role="page" id="welcome" data-url="{{ url_for('show_home') }}">
+
 <body background="{{ url_for('static',filename='background.jpg') }}">
 
 <head>
@@ -18,7 +21,7 @@
 
     <button type="button" id="submit" onclick="getText()"> Submit</button>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ url_for('static',filename='jquery-3.2.1.min.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
 
 
@@ -46,22 +49,29 @@
                 console.log("NOT HERE")
 
                 $.ajax({
-                    url: "http://127.0.0.1:5000/r",
-                    type: "POST",
+                    url: "http://localhost:5000/r",
+                    type: 'POST',
                     data: "username=".concat(username) + "&password=".concat(password),
+                    xhrFields: {
+				    	withCredentials: true
+				    },
+				    crossDomain: true,
                     success: function (data) {
-                        var json = JSON.parse(data);
-                        var result = json["result"]
-                        if (result==="200"){
-                            console.log("SUCCESS")
-                            // TODO redirect to SB page
-                        }
-                        else if (result==="403"){
-                            $("#password").effect("bounce");
-                            console.log("DAIL")
-
-                        }
+                    	window.location = "http://localhost:5000/home"
                     }
+                    //     var json = JSON.parse(data);
+                    //     var result = json["result"]
+                    //     if (result==="200"){
+                    //         console.log("SUCCESS")
+                    //         // TODO redirect to SB page
+                    //     }
+                    //     else if (result==="403"){
+                    //         $("#password").effect("bounce");
+                    //         console.log("DAIL")
+
+                    //     }
+                    //     alert(result);
+                    // }
 
 
                 });
@@ -72,5 +82,5 @@
 </div>
 </body>
 
-
+</div>
 </html>

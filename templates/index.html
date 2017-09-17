@@ -59,7 +59,7 @@ if ('webkitSpeechRecognition' in window) {
     console.log(final_transcript);
     final_span.innerHTML = linebreak(final_transcript);
 	  $.ajax({
-	  	url:  "http://127.0.0.1:5000/transcript",
+	  	url:  "http://localhost:5000/transcript",
 		type:"POST", 
 		contentType: "application/json", 
 		dataType: "json",
