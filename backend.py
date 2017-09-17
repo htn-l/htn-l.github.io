@@ -280,13 +280,20 @@ def get_summary(text):
     return total_string
 
 
+@app.route('/')
+def home_page():
+    # console.log("h")
+    print("h")
+    return render_template("login.html", name=None)
 
 @app.route("/transcript", methods=["POST"])
 def get_summaryi():
     data = request.form
     print(data)
-    user = data["username"]
+    # user = data["username"]
     text = data["text"]
+    print(text)
+    #print(data[1])
     summary = get_summary(text)
     db.add_lecture(user,text,summary)
 
@@ -356,11 +363,6 @@ def show_home():
 #         fail = dict()
 #         fail["result"] = "403"
 #         # return json.dumps(fail)
-    @app.route('/')
-    def home_page():
-        #console.log("h")
-        print("h")
-        return render_template("login.html", name=None)
 if __name__ == '__main__':
     # s = get_summary("""Prime Minister Justin Trudeau will help open the Hack the North conference at the University of Waterloo Friday night
     #

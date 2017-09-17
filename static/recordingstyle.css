@@ -70,3 +70,8 @@ a {
 	transition: 0.5s;
 	color: #000000;
 }
+
+.container {
+	display: flex;
+	justify-content: center;
+}

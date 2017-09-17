@@ -9,9 +9,9 @@
 
   <body>
     <h1 id="header"> SumNotes </h1>
-
-    <button onclick="startDictation(event)">Start Recording</button>
-
+    <div class="container">
+      <button onclick="startDictation(event)">Start Recording</button>
+    </div>
     <div class = "text">
     </div>
 
@@ -79,7 +79,7 @@ function startDictation(event) {
   if (recognizing) {
     recognition.stop();
     $.ajax({
-        url:  "http://127.0.0.1:5000/transcript",
+        url:  "http://localhost:5000/transcript",
         type:"POST",
         data: {"text":final_transcript},
         success: function(data) {
