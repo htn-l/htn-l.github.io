@@ -127,7 +127,7 @@
 ##    user = data["username"]
 ##    password = data["password"]
 ##    print("here")
-##    db.create_user("Test", sha256(bytes("red")).hexdigest())
+
 ##    # TODO check if user is in db if not create otherwise sign in
 ##    if (db.find_user(user)):
 ##        storedPass = db.get_user_hash()
@@ -255,6 +255,7 @@ db = roachdb.RoachDB();
 print("added")
 curUser = ""
 datat = {}
+#db.create_user("Advait_Maybhate", sha256(bytes("htn2017", "utf-8")).hexdigest())
 
 def get_summary(text):
     total_string =""
@@ -267,7 +268,7 @@ def get_summary(text):
 
 
     LANGUAGE = "english"
-    SENTENCES_COUNT = 2
+    SENTENCES_COUNT = int(text.count(".") * 0.2 + 1);
 
     parser = PlaintextParser.from_string(text, Tokenizer(LANGUAGE))
     stemmer = Stemmer(LANGUAGE)

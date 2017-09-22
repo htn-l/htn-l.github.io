@@ -37,8 +37,8 @@ class RoachDB:
 
 
     def view_lecture(self, id):
-        self.cur.execute("SELECT (transcript, summary) FROM lectures WHERE lectureid = %s", [id])
-        return self.cur.fetchall()
+        self.cur.execute("SELECT (transcript, summary) FROM lectures WHERE lectureid = (%s)", [id])
+        self.cur.fetchall();
 
     def get_all_lectures(self, username):
         self.cur.execute("SELECT lectureid FROM users_to_lectures WHERE username=(%s)", [username])
@@ -46,7 +46,9 @@ class RoachDB:
         for i in self.cur.fetchall():
             data = self.view_lecture(str(i[0]))
             data2 = list(data)
+            print(type(data2[0][0]))
             temp.append(data2[0][0])
+##            temp.append(i[0])
         return temp
 
 
@@ -58,12 +60,12 @@ class RoachDB:
 
 if __name__ == '__main__':
     db = RoachDB()
-    # print(db.find_user("leonf"))
-    # db.view_lecture("280333094310215681")
-    # db.get_user_hash("leon")
-    # if not db.find_user("leonf"):
-    #     db.create_user("leonf", "Fattakhov")
+    print(db.find_user("leonf"))
+    db.view_lecture("280333094310215681")
+    db.get_user_hash("leon")
+    if not db.find_user("leonf"):
+        db.create_user("leonf", "Fattakhov")
     db.add_lecture("leon",
                    "djfjaslkdjfkdsajf lksdjflksjlkfjdslkfjdsalkjfds;lkajflkdsajflksajdlkfjdsalkfjdslkajfdlksajflkjlkdjfalkdsjflkdsjflkdsjfldsjfjflkdsajf;lsaf")
-    print(db.get_all_lectures("leon"))
+    db.get_all_lectures("leon")
     db.close()

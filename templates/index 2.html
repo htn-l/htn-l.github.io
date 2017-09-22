@@ -57,7 +57,7 @@ if ('webkitSpeechRecognition' in window) {
         interim_transcript += event.results[i][0].transcript;
       }
     }
-    final_transcript = capitalize(final_transcript)+".";
+    final_transcript = "\n - " + capitalize(final_transcript)+". ";
     console.log(final_transcript);
     final_span.innerHTML = linebreak(final_transcript);
     
