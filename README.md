@@ -32,4 +32,5 @@ The next steps for SumNotes is to improve our speech recognition, implementing m
 
 HTML & CSS, JavaScript, JQuery, Python, Flask, webkit speech recognition API, SUMY API, Cockroach Database
 
-Try it out!
+Check out a demo!
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/7WO4xGwmXgE/0.jpg)](https://www.youtube.com/watch?v=7WO4xGwmXgE)
