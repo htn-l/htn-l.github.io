@@ -34,4 +34,4 @@ HTML & CSS, JavaScript, JQuery, Python, Flask, webkit speech recognition API, SU
 
 Check out a demo!
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/7WO4xGwmXgE/0.jpg)](https://www.youtube.com/watch?v=7WO4xGwmXgE)
+[![Screenshot](https://img.youtube.com/vi/7WO4xGwmXgE/0.jpg)](https://www.youtube.com/watch?v=7WO4xGwmXgE)
